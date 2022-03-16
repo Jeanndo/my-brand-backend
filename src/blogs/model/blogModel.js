@@ -1,5 +1,6 @@
 // @ts-nocheck
 import mongoose from "mongoose"
+import multer from "multer"
 
 const blogSchema = new mongoose.Schema(
   {
@@ -9,7 +10,6 @@ const blogSchema = new mongoose.Schema(
     },
     blogImage: {
       type: String,
-      required: [true, "A blog should have an descriptoive image "],
     },
     description: {
       type: String,

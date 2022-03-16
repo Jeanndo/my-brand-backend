@@ -20,7 +20,7 @@ router
   .route("/:id")
   .get(
     middlewares.protect,
-    middlewares.restrictTo("user", "admin"),
+    middlewares.restrictTo("admin"),
     messageController.getMessage
   )
   .patch(

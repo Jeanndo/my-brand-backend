@@ -4,6 +4,7 @@ import User from "./../users/model/userModel.js"
 import jwt from "jsonwebtoken"
 import AppError from "./../utils/appError.js"
 import { promisify } from "util"
+import multer from "multer"
 
 export const protect = catchAsync(async (req, res, next) => {
   let token
@@ -34,13 +35,6 @@ export const protect = catchAsync(async (req, res, next) => {
     )
   }
 
-  // Check if User changed password after jwt was issued
-
-  // if (freshUser.changedPasswordAfter(decoded.iat)) {
-  //   return next(
-  //     new AppError("User recently changed Password Please login again", 401)
-  //   )
-  // }
   req.user = freshUser
 
   next()
@@ -62,4 +56,9 @@ export const setBlogCommentIds = (req, res, next) => {
   if (!req.body.blog) req.body.blog = req.params.blogId
   if (!req.body.author) req.body.author = req.user._id
   next()
+}
+
+export const uploadImage = (fileName) => {
+  const upload = multer({ dest: "uploads/" })
+  return upload.single(fileName)
 }

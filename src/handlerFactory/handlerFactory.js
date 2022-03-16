@@ -6,10 +6,9 @@ export const deleteOne = (Model) =>
     const doc = await Model.findByIdAndRemove(req.params.id)
 
     if (!doc) return next(new AppError("No document with that ID", 404))
-    res.status(204).json({
+    res.status(200).json({
       status: "success",
-      message: "document deleted successfully ",
-      data: null,
+      message: "document deleted successfully 👍🏾 ",
     })
   })
 
@@ -30,9 +29,24 @@ export const updateOne = (Model) =>
     })
   })
 
-export const createOne = (Model) =>
+export const createOne = (Model, specificModel) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body)
+    let doc
+    if (specificModel === "Blog") {
+      doc = await Model.create({
+        title: req.body.title,
+        blogImage: req.file.path,
+        description: req.body.description,
+      })
+    } else if (specificModel === "Project") {
+      doc = await Model.create({
+        name: req.body.name,
+        projectImage: req.file.path,
+        price: req.body.price,
+      })
+    } else {
+      doc = await Model.create(req.body)
+    }
     res.status(201).json({
       status: "success",
       data: {
@@ -66,6 +80,7 @@ export const getAll = (Model) =>
     if (req.params.blogId) filter = { blog: req.params.blogId }
 
     const docs = await Model.find(filter)
+
     res.status(200).json({
       status: "success",
       results: docs.length,
@@ -82,12 +97,12 @@ export const Like = (Model) =>
     const doc = await Model.findById(req.params.id)
     if (!doc) return next(new AppError("No blog with that ID", 404))
 
-    const index = doc.likes.findIndex((id) => id === req.user._id)
+    const index = doc.likes.findIndex((id) => id === req.user.id)
 
     if (index === -1) {
       doc.likes.push(req.user._id)
     } else {
-      doc.likes = doc.likes.filter((id) => id !== String(req.user._id))
+      doc.likes = doc.likes.filter((id) => id !== req.user.id)
     }
     const updatedDoc = await Model.findByIdAndUpdate(req.params.id, doc, {
       new: true,
@@ -108,12 +123,12 @@ export const Dislike = (Model) =>
     const doc = await Model.findById(req.params.id)
     if (!doc) return next(new AppError("No blog with that ID", 404))
 
-    const index = doc.disLikes.findIndex((id) => id === req.user._id)
+    const index = doc.disLikes.findIndex((id) => id === req.user.id)
 
     if (index === -1) {
       doc.disLikes.push(req.user._id)
     } else {
-      doc.disLikes = doc.disLikes.filter((id) => id !== String(req.user._id))
+      doc.disLikes = doc.disLikes.filter((id) => id !== req.user.id)
     }
     const updatedDoc = await Model.findByIdAndUpdate(req.params.id, doc, {
       new: true,
@@ -123,6 +138,26 @@ export const Dislike = (Model) =>
       status: "success",
       data: {
         blog: updatedDoc,
+      },
+    })
+  })
+
+export const subscribe = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const { email } = req.body
+    const doc = await Model.findOne({ email: email })
+    if (doc)
+      return next(
+        new AppError("You had Already Subscribed to the news Letter", 400)
+      )
+    const NewSubscribed = await Model.create({
+      email: req.body.email,
+    })
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        data: NewSubscribed,
       },
     })
   })

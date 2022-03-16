@@ -25,6 +25,7 @@ export const signup = catchAsync(async (req, res, next) => {
       new AppError("User Already exist, Please use different Account", 401)
     )
   }
+
   const newUser = await User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -37,7 +38,7 @@ export const signup = catchAsync(async (req, res, next) => {
   const token = signToken(newUser._id)
   res.status(201).json({
     status: "success",
-    token,
+    message: `${newUser.firstName} Registered successfuly `,
     data: {
       user: newUser,
     },
@@ -48,7 +49,7 @@ export const signup = catchAsync(async (req, res, next) => {
 
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body
-
+  console.log(email, password)
   if (!email || !password) {
     return next(new AppError("Please provide email and password", 400))
   }

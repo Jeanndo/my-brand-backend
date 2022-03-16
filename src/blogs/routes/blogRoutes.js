@@ -3,32 +3,36 @@ import express from "express"
 import * as blogController from "./../controller/blogControllers.js"
 import commentRouter from "./../../comments/routes/commentRoutes.js"
 import * as middlewares from "./../../middlewares/middleware.js"
+import multer from "multer"
+
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "uploads/")
+  },
+  filename: function (req, file, callback) {
+    callback(null, new Date().toISOString() + file.originalname)
+  },
+})
+const upload = multer({ storage: storage })
 
 const router = express.Router()
 
-router.patch("/like/:id", blogController.likeBlog)
-router.patch("/dislike/:id", blogController.disLikeBlog)
+router.patch("/like/:id", middlewares.protect, blogController.likeBlog)
+router.patch("/dislike/:id", middlewares.protect, blogController.disLikeBlog)
 router.use("/:blogId/comments", commentRouter)
 
 router
   .route("/")
-  .get(
-    middlewares.protect,
-    middlewares.restrictTo("admin"),
-    blogController.getAllBlogs
-  )
+  .get(blogController.getAllBlogs)
   .post(
     middlewares.protect,
     middlewares.restrictTo("admin"),
+    upload.single("blogImage"),
     blogController.createBlog
   )
 router
   .route("/:id")
-  .get(
-    middlewares.protect,
-    middlewares.restrictTo("admin"),
-    blogController.getBlog
-  )
+  .get(blogController.getBlog)
   .patch(
     middlewares.protect,
     middlewares.restrictTo("admin"),
