@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1647407127862" clover="3.2.0">
-  <project timestamp="1647407127862" name="All files">
-    <metrics statements="280" coveredstatements="130" conditionals="76" coveredconditionals="3" methods="53" coveredmethods="12" elements="409" coveredelements="145" complexity="0" loc="280" ncloc="280" packages="24" files="26" classes="26"/>
+<coverage generated="1647453625088" clover="3.2.0">
+  <project timestamp="1647453625089" name="All files">
+    <metrics statements="280" coveredstatements="130" conditionals="76" coveredconditionals="2" methods="53" coveredmethods="12" elements="409" coveredelements="144" complexity="0" loc="280" ncloc="280" packages="24" files="26" classes="26"/>
     <package name="my-brand-backend">
       <metrics statements="16" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="0"/>
       <file name="app.js" path="/Users/andelarwanda/Desktop/mybrand-backend/my-brand-backend/app.js">
@@ -200,9 +200,9 @@
       </file>
     </package>
     <package name="my-brand-backend.src.handlerFactory">
-      <metrics statements="61" coveredstatements="20" conditionals="28" coveredconditionals="2" methods="20" coveredmethods="9"/>
+      <metrics statements="61" coveredstatements="20" conditionals="28" coveredconditionals="1" methods="20" coveredmethods="9"/>
       <file name="handlerFactory.js" path="/Users/andelarwanda/Desktop/mybrand-backend/my-brand-backend/src/handlerFactory/handlerFactory.js">
-        <metrics statements="61" coveredstatements="20" conditionals="28" coveredconditionals="2" methods="20" coveredmethods="9"/>
+        <metrics statements="61" coveredstatements="20" conditionals="28" coveredconditionals="1" methods="20" coveredmethods="9"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="6" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -215,12 +215,12 @@
         <line num="24" count="0" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
         <line num="33" count="5" type="stmt"/>
-        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="5" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
@@ -230,10 +230,10 @@
         <line num="67" count="0" type="stmt"/>
         <line num="75" count="1" type="stmt"/>
         <line num="76" count="6" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
         <line num="95" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -311,7 +311,7 @@
         <line num="38" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
-        <line num="44" count="13" type="stmt"/>
+        <line num="44" count="22" type="stmt"/>
         <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="46" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
