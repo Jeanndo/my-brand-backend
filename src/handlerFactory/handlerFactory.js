@@ -41,12 +41,13 @@ export const createOne = (Model, specificModel) =>
     } else if (specificModel === "Project") {
       doc = await Model.create({
         name: req.body.name,
-        projectImage: req.file.path,
+        projectImage: req.file.filename,
         price: req.body.price,
       })
     } else {
       doc = await Model.create(req.body)
     }
+    console.log(doc)
     res.status(201).json({
       status: "success",
       data: {
