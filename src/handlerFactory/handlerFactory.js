@@ -31,17 +31,18 @@ export const updateOne = (Model) =>
 
 export const createOne = (Model, specificModel) =>
   catchAsync(async (req, res, next) => {
+    console.log(req.body.blogImage)
     let doc
     if (specificModel === "Blog") {
       doc = await Model.create({
         title: req.body.title,
-        blogImage: req.file.filename,
+        blogImage: req.body.blogImage,
         description: req.body.description,
       })
     } else if (specificModel === "Project") {
       doc = await Model.create({
         name: req.body.name,
-        projectImage: req.file.filename,
+        projectImage: req.body.projectImage,
         price: req.body.price,
       })
     } else {

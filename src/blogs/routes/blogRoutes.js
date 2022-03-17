@@ -21,15 +21,12 @@ router.patch("/like/:id", middlewares.protect, blogController.likeBlog)
 router.patch("/dislike/:id", middlewares.protect, blogController.disLikeBlog)
 router.use("/:blogId/comments", commentRouter)
 
-router
-  .route("/")
-  .get(blogController.getAllBlogs)
-  .post(
-    middlewares.protect,
-    middlewares.restrictTo("admin"),
-    upload.single("blogImage"),
-    blogController.createBlog
-  )
+router.route("/").get(blogController.getAllBlogs).post(
+  // middlewares.protect,
+  // middlewares.restrictTo("admin"),
+  upload.single("blogImage"),
+  blogController.createBlog
+)
 router
   .route("/:id")
   .get(blogController.getBlog)
