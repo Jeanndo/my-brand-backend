@@ -9,6 +9,7 @@ import commentRouter from "./src/comments/routes/commentRoutes.js"
 import subscribeRouter from "./src/Subscribers/Routes/subscriberRoutes.js"
 import AppError from "./src/utils/appError.js"
 import globalErrorHandler from "./src/errorControllers/errorController.js"
+import cors from "cors"
 
 const app = express()
 dotenv.config({ path: "./config.env" })
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"))
 }
 
+app.use(cors())
 app.use(express.json())
 
 //  Welcome Route with a welcome message on my app
