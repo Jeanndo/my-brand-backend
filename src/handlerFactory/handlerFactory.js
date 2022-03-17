@@ -45,6 +45,7 @@ export const createOne = (Model, specificModel) =>
         name: req.body.name,
         projectImage: req.body.projectImage,
         price: req.body.price,
+        link: req.body.link,
       })
     } else {
       doc = await Model.create(req.body)

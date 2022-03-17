@@ -13,6 +13,10 @@ const projectSchema = new mongoose.Schema({
     type: Number,
     required: [true, "A project should have a price"],
   },
+  link: {
+    type: String,
+    trim: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
