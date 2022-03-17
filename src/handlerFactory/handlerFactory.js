@@ -38,6 +38,7 @@ export const createOne = (Model, specificModel) =>
         title: req.body.title,
         blogImage: req.body.blogImage,
         description: req.body.description,
+        author: req.user.firstName,
       })
     } else if (specificModel === "Project") {
       doc = await Model.create({
