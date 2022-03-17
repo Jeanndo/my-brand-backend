@@ -35,7 +35,7 @@ export const createOne = (Model, specificModel) =>
     if (specificModel === "Blog") {
       doc = await Model.create({
         title: req.body.title,
-        blogImage: req.file.path,
+        blogImage: req.file.filename,
         description: req.body.description,
       })
     } else if (specificModel === "Project") {
