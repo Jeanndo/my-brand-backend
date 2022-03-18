@@ -3,17 +3,6 @@ import express from "express"
 import * as blogController from "./../controller/blogControllers.js"
 import commentRouter from "./../../comments/routes/commentRoutes.js"
 import * as middlewares from "./../../middlewares/middleware.js"
-import multer from "multer"
-
-const storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "uploads/")
-  },
-  filename: function (req, file, callback) {
-    callback(null, new Date().toISOString() + file.originalname)
-  },
-})
-const upload = multer({ storage: storage })
 
 const router = express.Router()
 
@@ -27,7 +16,6 @@ router
   .post(
     middlewares.protect,
     middlewares.restrictTo("admin"),
-    upload.single("blogImage"),
     blogController.createBlog
   )
 router

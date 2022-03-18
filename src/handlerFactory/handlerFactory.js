@@ -29,29 +29,9 @@ export const updateOne = (Model) =>
     })
   })
 
-export const createOne = (Model, specificModel) =>
+export const createOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    // console.log(req.body)
-    let doc
-    if (specificModel === "Blog") {
-      doc = await Model.create({
-        title: req.body.title,
-        blogImage: req.body.blogImage,
-        description: req.body.description,
-        author: req.user.firstName,
-      })
-    } else if (specificModel === "Project") {
-      console.log(req.body)
-      doc = await Model.create({
-        name: req.body.name,
-        projectImage: req.body.projectImage,
-        price: req.body.price,
-        link: req.body.link,
-      })
-    } else {
-      doc = await Model.create(req.body)
-    }
-    console.log(doc)
+    const doc = await Model.create(req.body)
     res.status(201).json({
       status: "success",
       data: {
