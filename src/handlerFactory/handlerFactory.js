@@ -31,7 +31,7 @@ export const updateOne = (Model) =>
 
 export const createOne = (Model, specificModel) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.body.blogImage)
+    // console.log(req.body)
     let doc
     if (specificModel === "Blog") {
       doc = await Model.create({
@@ -41,6 +41,7 @@ export const createOne = (Model, specificModel) =>
         author: req.user.firstName,
       })
     } else if (specificModel === "Project") {
+      console.log(req.body)
       doc = await Model.create({
         name: req.body.name,
         projectImage: req.body.projectImage,
