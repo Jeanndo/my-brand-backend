@@ -1,17 +1,18 @@
 import mongoose from "mongoose"
 
 const messageSchema = new mongoose.Schema({
-  firstName: {
+  fullName: {
     type: String,
-    required: [true, "Your First Name Please !"],
+    required: [true, "Your Full Name Please !"],
   },
-  lastName: {
-    type: String,
-    required: [true, "Your Last Name Please !"],
-  },
+
   email: {
     type: String,
     required: [true, "Your Email  Please!"],
+  },
+  subject: {
+    type: String,
+    required: [true, "Your Subject  Please!"],
   },
   message: {
     type: String,
