@@ -7,6 +7,41 @@ const router = express.Router()
 
 // Auth Routes
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *      userScehma:
+ *          required:
+ *             -firstName
+ *             -lastName
+ *             -email
+ *             -password
+ *             -confirmPassword
+ *          properties:
+ *            firstName:
+ *               type:string
+ *               description:Your First Name Please !
+ *            lastName:
+ *                type:string
+ *                description:Your Last Name Please !
+ *            email:
+ *                type:string
+ *                description:Your Email Please!
+ *            password:
+ *                type:string
+ *                description:Your Password Please!
+ *            confirmPassword:
+ *                type:string
+ *                description:Please  confirm Your Password !
+ *          example:
+ *           firstName:JEAN DE DIEU
+ *           lastName:UKWITEGETSE
+ *           email:example@gmail.com
+ *           password:12345678
+ *           confirmPassword:12345678
+ */
+
 router.post("/signup", authController.signup)
 router.post("/login", authController.login)
 router.post("/forgotPassword", authController.forgotPassword)

@@ -15,6 +15,9 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: [true, "A blog should have a description"],
     },
+    cloudinary_Id: {
+      type: String,
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
