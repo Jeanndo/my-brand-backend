@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema({
       message: "Passwords are not matching",
     },
   },
+  cloudinary_Id: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

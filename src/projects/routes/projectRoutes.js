@@ -1,19 +1,17 @@
 import express from "express"
 import * as projectController from "./../controllers/projectControllers.js"
 import * as middlewares from "../../middlewares/middleware.js"
+import { upload } from "./../../utils/multer.js"
 
 const router = express.Router()
 
 router
   .route("/")
-  .get(
-    middlewares.protect,
-    middlewares.restrictTo("admin"),
-    projectController.getAllProjects
-  )
+  .get(projectController.getAllProjects)
   .post(
     middlewares.protect,
     middlewares.restrictTo("admin"),
+    upload.single("projectImage"),
     projectController.createProject
   )
 router

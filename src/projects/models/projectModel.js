@@ -13,6 +13,9 @@ const projectSchema = new mongoose.Schema({
     type: Number,
     required: [true, "A project should have a price"],
   },
+  cloudinary_Id: {
+    type: String,
+  },
   link: {
     type: String,
     trim: true,

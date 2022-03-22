@@ -1,9 +1,17 @@
+// @ts-nocheck
 import catchAsync from "../utils/catchAsync.js"
 import AppError from "../utils/appError.js"
+import cloudinary from "./../utils/cloudinary.js"
 
-export const deleteOne = (Model) =>
+export const deleteOne = (Model, specificModel) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndRemove(req.params.id)
+    let doc
+    if (specificModel === "Blog" || specificModel === "Project") {
+      doc = await Model.findByIdAndRemove(req.params.id)
+      await cloudinary.uploader.destroy(doc.cloudinary_Id)
+    } else {
+      doc = await Model.findByIdAndRemove(req.params.id)
+    }
 
     if (!doc) return next(new AppError("No document with that ID", 404))
     res.status(200).json({
@@ -29,9 +37,31 @@ export const updateOne = (Model) =>
     })
   })
 
-export const createOne = (Model) =>
+export const createOne = (Model, specialModel) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body)
+    const result = await cloudinary.uploader.upload(req.file.path)
+    let doc
+    console.log(req.user)
+    if (specialModel === "Blog") {
+      doc = await Model.create({
+        title: req.body.title,
+        blogImage: result.secure_url,
+        description: req.body.description,
+        cloudinary_Id: result.public_id,
+        author: req.user.firstName,
+      })
+    } else if (specialModel === "Project") {
+      doc = await Model.create({
+        name: req.body.name,
+        projectImage: result.secure_url,
+        price: req.body.price,
+        link: req.user.link,
+        cloudinary_Id: result.public_id,
+      })
+    } else {
+      doc = await Model.create(req.body)
+    }
+    console.log("doc", doc)
     res.status(201).json({
       status: "success",
       data: {
