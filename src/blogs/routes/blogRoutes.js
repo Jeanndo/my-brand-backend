@@ -3,6 +3,7 @@ import express from "express"
 import * as blogController from "./../controller/blogControllers.js"
 import commentRouter from "./../../comments/routes/commentRoutes.js"
 import * as middlewares from "./../../middlewares/middleware.js"
+import { upload } from "./../../utils/multer.js"
 
 const router = express.Router()
 
@@ -16,6 +17,7 @@ router
   .post(
     middlewares.protect,
     middlewares.restrictTo("admin"),
+    upload.single("blogImage"),
     blogController.createBlog
   )
 router
