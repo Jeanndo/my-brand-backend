@@ -41,8 +41,6 @@ export const updateOne = (Model) =>
 export const createOne = (Model, specialModel) =>
   catchAsync(async (req, res, next) => {
     let doc
-    console.log(req.user)
-    console.log("result", result)
 
     if (specialModel === "Blog") {
       const result = await cloudinary.uploader.upload(req.file.path)
