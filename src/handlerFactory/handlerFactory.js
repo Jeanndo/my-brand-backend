@@ -95,7 +95,7 @@ export const getAll = (Model) =>
     let filter = {}
     if (req.params.blogId) filter = { blog: req.params.blogId }
 
-    const docs = await Model.find(filter)
+    const docs = await Model.find(filter).sort("-createdAt")
 
     res.status(200).json({
       status: "success",
