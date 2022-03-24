@@ -2,7 +2,6 @@
 import catchAsync from "../utils/catchAsync.js"
 import AppError from "../utils/appError.js"
 import cloudinary from "./../utils/cloudinary.js"
-import path from "path"
 
 export const deleteOne = (Model, specificModel) =>
   catchAsync(async (req, res, next) => {
@@ -57,7 +56,7 @@ export const createOne = (Model, specialModel) =>
         name: req.body.name,
         projectImage: result.secure_url,
         price: req.body.price,
-        link: req.user.link,
+        link: req.body.link,
         cloudinary_Id: result.public_id,
       })
     } else {
